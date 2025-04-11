@@ -2,10 +2,14 @@
 Static site for the band website.
 
 ## Usage
-'''npm run build''' 
+```
+npm run build
+```
 To build the project with 11ty
 
-'''npm run start'''
+```
+npm run start
+```
 Starts the 11ty web server
 
 ### TODO
