@@ -1,0 +1,309 @@
+/* ------------------------------------------------ */
+/* ------------------- DEFAULT -------------------- */
+/* ------------------------------------------------ */
+
+body {
+    /* min-height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    /* Body takes at least full viewport height */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #FFA1DD;
+    font-family: Cardo;
+    color: rgb(33, 37, 41);
+}
+
+main {
+    /* Grow content height to fill available space in <body> */
+    flex: 1; 
+}
+
+/* ------------------------------------------------ */
+/* -------------------- NAVBAR -------------------- */
+/* ------------------------------------------------ */
+
+.navbar {
+    height: 150px;
+    margin: 0 10px;
+    display: flex;
+    justify-content: space-evenly;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+
+/* LEFT SIDE */
+.site-links {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 1;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 1;
+}
+
+.dropdown-icon {
+    width: 50px;
+    display: none;
+}
+
+/* CENTRE */
+.nav-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+#logo {
+    width: 125px;
+}
+
+/* RIGHT SIDE */
+.nav-socials {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex: 1;
+}
+
+/* DROPDOWN MENU */
+/* Appears below navbar when dropdown button is clicked */
+/* and when the screen size is reduced -> media query. */
+.dropdown-menu {
+    padding: 0;
+    text-align: center;
+    /* margin-top: 33px; */
+    background-color: rgb(72, 61, 139);
+    list-style-type: none;
+}
+.dropdown-menu a {
+    display: block;
+    padding: 16px;
+    margin: 0;
+}
+.dropdown-menu a:hover {
+    background-color: rgba(132, 122, 141, 0.368);
+    /* background-color: darkslategray; */
+    text-decoration: none;
+    transition: 0.3s;
+}
+.dropdown-menu-hidden {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 1s ease, opacity 1s ease;
+}
+.dropdown-menu:not(.dropdown-menu-hidden) {
+    max-height: 400px;
+    opacity: 1;
+}
+.no-transition {
+    transition: none !important; /* Disable transitions temporarily */
+}
+
+/* MEDIA QUERIES FOR NAVBAR */
+@media screen and (max-width: 800px) {
+    .nav-links {
+        display: none;
+    }
+    .dropdown-icon {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 478px) {
+    .site-links {
+        display: none;
+    }
+    .nav-socials {
+        display: none;
+    }
+    /* Toggle dropdown menu to stay open */
+    .dropdown-menu {
+        max-height: 400px;
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+        margin: 0 0 20px 0;
+    }
+    .dropdown-menu li {
+        height: 60px;
+    }
+}
+
+/* ------------------------------------------------ */
+/* --------------------- BODY --------------------- */
+/* ------------------------------------------------ */
+
+a {
+    color: black;
+    text-decoration: none;
+    /* font-size: 20px; */
+    font-size: 1.2rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.page-heading {
+    margin-bottom: 20px;
+    padding: 0;
+    text-align: center;
+    font-size: 1.5rem;
+    /* color: rgb(17, 17, 17); */
+    font-weight:400;
+}
+
+h1 {
+    margin: 0;
+    /* font-size: 2.5rem; */
+}
+
+.content {
+    text-align: center;
+    font-weight: 400;
+}
+
+.review {
+    width: 75%;
+    /* margin: 0 auto; */
+}
+
+.spotify-embed {
+    width: 75%;
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 1200px) {
+    .spotify-embed {
+        width: 50%;
+    }
+    .review {
+        width: 50%;
+    }
+}
+
+.about {
+    /* width: 100%; */
+    position: relative;
+    text-align: center;
+    color: white;
+    /* font-size: 16px; */
+}
+
+.bio {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    line-height: 150%;
+}
+
+@media screen and (min-width: 1250px) {
+    .bio h3 {
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+    }
+    .bio {
+        padding: 100px 0;
+        font-size: 1.3rem;
+        line-height: 1.75em;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .bio {
+        padding: 100px 0;
+        font-size: 2.5rem;
+        line-height: 2em;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .bio {
+        font-size: 0.75rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .bio {
+        font-size: 0.4rem;
+    }
+}
+
+#band-photo {
+    width: 100%;
+    height: 50%;
+    /* height: 400px; */
+}
+
+
+/* ------------------------------------------------ */
+/* -------------------- FOOTER -------------------- */
+/* ------------------------------------------------ */
+
+.footer {
+    margin: 0 20px;
+    padding: 40px 0px 30px 30px;
+    /* padding: 30px 20px; */
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer a {
+    text-decoration: underline;
+    /* font-size: 1.2rem; */
+}
+
+.footer a:hover {
+    text-decoration: none;
+}
+
+/* ---------------------------- */
+/* ---------- FOOTER ---------- */
+/* ---------------------------- */
+
+
+/* ------------------------------- */
+/* -------- LIVE POSTS ----------- */
+/* ------------------------------- */
+.live-list {
+    width: 75%;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    /* text-align: left; */
+}
+.live-item {
+    margin-bottom: 10px;
+}
+
+.live-title {
+    font-weight: 700;
+}
+
+.live-post {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.live-location {
+    font-size: 1rem;
+}
+
+.live-back-link {
+    font-weight: 700;
+}

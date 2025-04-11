@@ -1,0 +1,12 @@
+<div class="live-post">
+
+    <p class="live-location">Location: <%= location || 'Location TBD' %></p>
+
+    <p class="live-description"><%= description || 'No Description Available.' %></p>
+    
+    <p class="live-location"><%= venueAddress || 'Venue TBD' %></p>
+    
+    <p class="live-date"><%= date ? new Date(date).toLocaleDateString() : 'Date TBD' %></p>
+    
+    <a href="/live" class="live-back-link">&#8592; All Gigs</a>
+</div>

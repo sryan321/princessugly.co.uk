@@ -1,0 +1,22 @@
+---
+layout: layout.ejs
+title: All Gigs
+---
+
+<ul class="live-list">
+    <% if (collections.live && collections.live.length){ %>
+        <% for (let live of collections.live.sort((a, b) => new Date(b.data.date) - new Date(a.data.date))) { %>
+            <li class="live-item">
+                <a href="<%= live.url %>" class="live-title"><%= live.data.title %></a>
+                <% if (live.data.date) { %>
+                    - <%= new Date(live.data.date).toLocaleDateString() %>
+                <% } %>
+                <% if (live.data.location) { %>
+                    <span class="live-location">(<%= live.data.location %>)</span>
+                <% } %>
+            </li>
+        <% } %>
+    <% } else { %>
+        <p>No live shows found.</p>
+    <% } %>
+</ul>
