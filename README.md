@@ -12,7 +12,7 @@ npm run start
 ```
 Starts the 11ty web server
 
-[Princess Ugly](https://www.princesugly.co.uk "Band Homepage")
+[Princess Ugly](https://www.princessugly.co.uk "Band Homepage")
 
 
 Using eleventy/11ty as generator.
