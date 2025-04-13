@@ -117,15 +117,15 @@ main {
     }
 }
 
-@media screen and (max-width: 478px) {
-    .site-links {
+/* @media screen and (max-width: 478px) { */
+    /* .site-links {
         display: none;
     }
     .nav-socials {
         display: none;
     }
-    /* Toggle dropdown menu to stay open */
-    .dropdown-menu {
+    Toggle dropdown menu to stay open */
+    /* .dropdown-menu {
         max-height: 400px;
         opacity: 1;
         display: flex;
@@ -135,7 +135,7 @@ main {
     .dropdown-menu li {
         height: 60px;
     }
-}
+} */
 
 /* ------------------------------------------------ */
 /* --------------------- BODY --------------------- */
