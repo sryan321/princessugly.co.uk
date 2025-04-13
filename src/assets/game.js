@@ -27,6 +27,24 @@ function setBackground() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+// Dynamic canvas sizing
+function resizeCanvas() {
+    // Use 80% of smaller viewport dimension
+    const size = Math.min(window.innerWidth, window.innerHeight) * 0.8;
+    canvas.width = size;
+    canvas.height = size;
+    // Ensure pixel-perfect rendering
+    canvas.style.width = `${size}px`;
+    canvas.style.height = `${size}px`;
+    // Redraw background after resize
+    setBackground();
+}
+
+// Initial resize and listen for window resize
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+
 // Load images
 const princessImage = new Image();
 princessImage.src = '/assets/princess.png';
@@ -36,20 +54,20 @@ tieImage.src = '/assets/tie.png';
 // Player properties
 const player = {
     x: canvas.width / 2,
-    y: canvas.height - 75,
-    width: 75,
-    height: 75,
-    speed: 5,
+    y: canvas.height - (canvas.height * 0.125),
+    width: canvas.width * 0.125,
+    height: canvas.height * 0.125,
+    speed: canvas.width * 0.00833,
     dx: 0
 };
 
 // Ball (tie) properties
 const ball = {
-    x: Math.random() * (canvas.width - 50), // Ensure tie stays inside within canvas
+    x: Math.random() * (canvas.width - (canvas.width * 0.0833)), // Ensure tie stays inside within canvas
     y: 0,
-    width: 50,
-    height: 50,
-    speed: 3
+    width: canvas.width * 0.0833,
+    height: canvas.height * 0.0833,
+    speed: canvas.width * 0.005
 };
 
 // Game variables
@@ -81,12 +99,12 @@ restartButton.addEventListener('click', () => {
     gameOver = false;
     isPaused = false;
     player.x = canvas.width / 2;
-    player.y = canvas.height - 75;
+    player.y = canvas.height - (canvas.height * 0.125);
     player.dx = 0;
     ball.x = Math.random() * (canvas.width - ball.width);
     ball.y = 0;
-    ball.speed = 3;
-    player.speed = 5;
+    ball.speed = canvas.width * 0.005;
+    player.speed = canvas.width * 0.00833;
     gameLoop(); // Restart the loop
 });
 
@@ -119,14 +137,14 @@ function updateBall() {
         ball.y = 0;
         if (score % 100 === 0) {
             level++;
-            ball.speed += 0.2;
-            player.speed += 0.2;
+            ball.speed += canvas.width * 0.00033;
+            player.speed += canvas.width * 0.00033;
             setBackground();
         }
     }
 
     // Game over condition
-    if (ball.y + ball.height > canvas.height + 50) {
+    if (ball.y + ball.height > canvas.height + (canvas.height * 0.0167)) {
         gameOver = true;
     }
 }
@@ -162,24 +180,24 @@ function draw() {
     }
 
     // Draw score
-    ctx.font = '20px Arial';
+    ctx.font = `${canvas.width * 0.033}px Arial`;
     ctx.fillStyle = 'green';
-    ctx.fillText(`Score: ${score}`, 10, 30);
-    ctx.fillText(`Level: ${level}`, 14, 55);
+    ctx.fillText(`Score: ${score}`, canvas.width * 0.0167, canvas.height * 0.05);
+    ctx.fillText(`Level: ${level}`,  canvas.width * 0.0167, canvas.height * 0.1);
 
     // Draw pause state
     if (isPaused && !gameOver) {
-        ctx.font = '40px Arial';
+        ctx.font = `${canvas.width * 0.0667}px Arial`;
         ctx.fillStyle = 'red';
-        ctx.fillText('Paused', canvas.width / 2 - 60, canvas.height / 2);
+        ctx.fillText('Paused', canvas.width / 2 - (canvas.width * 0.1), canvas.height / 2);
     }
 
     // Draw game over
     if (gameOver) {
-        ctx.font = '40px Arial';
+        ctx.font = `${canvas.width * 0.0667}px Arial`;
         ctx.fillStyle = 'red';
-        ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2);
-        ctx.fillText(`Final Score: ${score}`, canvas.width / 2 - 115, canvas.height / 2 + 50);
+        ctx.fillText('Game Over', canvas.width / 2 - (canvas.width * 0.1667), canvas.height / 2);
+        ctx.fillText(`Final Score: ${score}`, canvas.width / 2 - (canvas.width * 0.1917), canvas.height / 2 + (canvas.height * 0.0833));
     }
 }
 
