@@ -308,14 +308,18 @@ h1 {
     font-weight: 700;
 }
 
-/* .game {
-    display: flex;
-    flex-direction: column;
-} */
+.game-container {
+
+    text-align: center;
+    padding: 0.5em
+}
 
 #gameCanvas {
+    display: block;
     margin: 0 auto;
     border: 2px solid black;
+    max-width: 100%;
+    max-height: 100vh;
     /* background-color: #0D0D0D;
     background-color: #2A0A47;
     background-color: #1A252F;
@@ -326,13 +330,32 @@ h1 {
     background-color: #3C3C3C; */
     /* background-color: #1C4B27; */
 }
+.controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+ }
 
-#restartButton {
-    display: block;
-    margin: 0 auto;
-    font-size: 1.5rem;
-    border: 0;
-    border-radius: 1em;
+ .control-button {
+    width: 15ch;
     padding: .75em;
-    background-color: slateblue;
+    font-size: 1.2rem;
+    background-color: #2A0A47;
+    color: #C71585;
+    border: 3px solid #0A6F6A;;
+    border-radius: 1em;
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.control-button:active {
+    background-color: #1A252F; /* Midnight Blue */
+}
+@media (max-width: 480px) {
+    .control-button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
 }

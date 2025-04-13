@@ -1,6 +1,8 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const restartButton = document.getElementById('restartButton');
+const leftButton = document.getElementById('leftButton');
+const rightButton = document.getElementById('rightButton');
 
 // Array of retro arcade background colors
 const retroColors = [
@@ -36,6 +38,7 @@ function resizeCanvas() {
     // Ensure pixel-perfect rendering
     canvas.style.width = `${size}px`;
     canvas.style.height = `${size}px`;
+    
     // Redraw background after resize
     setBackground();
 }
@@ -91,6 +94,48 @@ document.addEventListener('keydown', (e) => {
 
 document.addEventListener('keyup', (e) => {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') player.dx = 0;
+});
+
+// Handle touch controls
+if (leftButton) {
+    leftButton.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        player.dx = -player.speed;
+        console.log('Left touchstart');
+    });
+    leftButton.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        player.dx = 0;
+    });
+    leftButton.addEventListener('mousedown', () => {
+        player.dx = -player.speed;
+        console.log('Left mousedown');
+    });
+    leftButton.addEventListener('mouseup', () => {
+        player.dx = 0;
+    });
+}
+if (rightButton) {
+    rightButton.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        player.dx = player.speed;
+        console.log('Right touchstart');
+    });
+    rightButton.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        player.dx = 0;
+    });
+    rightButton.addEventListener('mousedown', () => {
+        player.dx = player.speed;
+        console.log('Right mousedown');
+    });
+    rightButton.addEventListener('mouseup', () => {
+        player.dx = 0;
+    });
+}
+// Prevent default touch behavior on canvas (e.g., scrolling)
+canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
 });
 
 // Restart game
