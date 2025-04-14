@@ -1,3 +1,14 @@
+/**
+ * Javascript for a simple retro style arcade game for the website.
+ * Loads two png image files - a princess and a tie.
+ * Ties drop and the princess must catch them.
+ * The princess moves left and right along the bottom controlled by the keyboards (arrow keys)
+ * and also with a left and right button beneath the game canvas. (Mobile/touchscreen compatibility).
+ * If a tie falls to the bottom, the game ends.
+ * Level increases every 10 ties caught - game speeds up, points increase.
+ */
+
+// Game controls and canvas
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const restartButton = document.getElementById('restartButton');
@@ -76,6 +87,7 @@ const ball = {
 // Game variables
 let score = 0;
 let level = 1;
+let total = 0;
 let gameOver = false;
 let isPaused = false;
 
@@ -91,17 +103,15 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
-
 document.addEventListener('keyup', (e) => {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') player.dx = 0;
 });
 
-// Handle touch controls
+// Handle buttons & touch controls
 if (leftButton) {
     leftButton.addEventListener('touchstart', (e) => {
         e.preventDefault();
         player.dx = -player.speed;
-        console.log('Left touchstart');
     });
     leftButton.addEventListener('touchend', (e) => {
         e.preventDefault();
@@ -109,7 +119,6 @@ if (leftButton) {
     });
     leftButton.addEventListener('mousedown', () => {
         player.dx = -player.speed;
-        console.log('Left mousedown');
     });
     leftButton.addEventListener('mouseup', () => {
         player.dx = 0;
@@ -119,7 +128,6 @@ if (rightButton) {
     rightButton.addEventListener('touchstart', (e) => {
         e.preventDefault();
         player.dx = player.speed;
-        console.log('Right touchstart');
     });
     rightButton.addEventListener('touchend', (e) => {
         e.preventDefault();
@@ -127,7 +135,6 @@ if (rightButton) {
     });
     rightButton.addEventListener('mousedown', () => {
         player.dx = player.speed;
-        console.log('Right mousedown');
     });
     rightButton.addEventListener('mouseup', () => {
         player.dx = 0;
@@ -140,17 +147,36 @@ canvas.addEventListener('touchstart', (e) => {
 
 // Restart game
 restartButton.addEventListener('click', () => {
+    // Cancel any ongoing animation frame to stop the loop 
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
+    // Reset all game variables
     score = 0;
+    level = 1;
+    total = 0;
     gameOver = false;
     isPaused = false;
+
+    // Reset player position and speed
     player.x = canvas.width / 2;
     player.y = canvas.height - (canvas.height * 0.125);
     player.dx = 0;
+    player.speed = canvas.width * 0.00833;
+
+    // Reset ball position and speed
     ball.x = Math.random() * (canvas.width - ball.width);
     ball.y = 0;
     ball.speed = canvas.width * 0.005;
-    player.speed = canvas.width * 0.00833;
-    gameLoop(); // Restart the loop
+
+    // Ensure canvas properly resized and background is reset
+    resizeCanvas();
+
+    // Start game loop only after full reset
+    if (!gameOver && !isPaused) {
+        gameLoop(); // Restart the loop
+    }
 });
 
 // Update player position
@@ -177,11 +203,12 @@ function updateBall() {
         ballCenterY > player.y &&
         ballCenterY < player.y + player.height
     ) {
-        score += 10;
+        total++;
+        score += 10 * level;
         ball.x = Math.random() * (canvas.width - ball.width);
         ball.y = 0;
-        if (score % 100 === 0) {
-            level++;
+        if (total % 10 === 0) {
+            level++; // level increases with every 10 ties caught
             ball.speed += canvas.width * 0.00033;
             player.speed += canvas.width * 0.00033;
             setBackground();
@@ -203,7 +230,6 @@ function draw() {
         ctx.fillStyle = backgroundColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
-
 
     // Draw player
     if (princessImage.complete) {
@@ -246,13 +272,16 @@ function draw() {
     }
 }
 
+// Game loop control
+let animationFrameId = null; // Track the animation frame
+
 // Game loop
 function gameLoop() {
     if (!gameOver && !isPaused) {
         updatePlayer();
         updateBall();
         draw();
-        requestAnimationFrame(gameLoop);
+        animationFrameId = requestAnimationFrame(gameLoop);
     } else {
         draw();
     }
