@@ -1,8 +1,9 @@
 # TODO
 - ~~Add favicon~~ 13.04.25
 - ~~Add arcade style game~~ 13.04.25
-- Fix game canvas to be dynamic
-- Game - add mobile compatibility?
+- ~~Fix game canvas to be dynamic~~ 13.04.25
+- ~~Game - add mobile compatibility?~~ 13.04.25
+- Add high score capabilities??? 
 - Possibly add track listing to live pages
 - Add pagination to live pages
 - Clean styling
