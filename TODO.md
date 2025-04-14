@@ -3,9 +3,13 @@
 - ~~Add arcade style game~~ 13.04.25
 - ~~Fix game canvas to be dynamic~~ 13.04.25
 - ~~Game - add mobile compatibility?~~ 13.04.25
-- Add high score capabilities??? 
+- ~~Fix - game speeds up when restart button clicked~~ 14.04.25 
+- ~~Reset level when restart clicked~~ 14.04.25
+- ~~Added score factor - score*level, level++ when total % 10.~~ 14.04.25
+- Add high score capabilities - if so, only local copy.
 - Possibly add track listing to live pages
 - Add pagination to live pages
 - Clean styling
+- Clean / refactor game code
 - Add accessibilty features (ARIA labels)
 - Optimise SEO with meta tags
